@@ -1,0 +1,1639 @@
+/* ==========================================================================
+   Saa'a / ساعة - Luxury Chronograph Landing Page
+   Universal Responsive Design System for ALL Device Viewports
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Variables & Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Colors */
+  --bg-dark-base: #2b3038;
+  --bg-dark-deep: #1e2227;
+  --bg-dark-gradient: linear-gradient(135deg, #181a20 0%, #242830 50%, #2b3038 100%);
+  --product-accent: #ff4b4b; /* Coral red, dynamically updated per watch slide */
+  --accent-hover: #ff6565;
+
+  --text-white: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.72);
+  --text-faint: rgba(255, 255, 255, 0.38);
+
+  /* Typography Fonts */
+  --font-ar: 'Alexandria', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-ar-logo: 'Aref Ruqaa', serif;
+  --font-en: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-en-logo: 'Pacifico', cursive;
+
+  /* Default Active Font (Arabic by default) */
+  --font-body: var(--font-ar);
+  --font-logo: var(--font-ar-logo);
+
+  /* Safe Area Insets (iPhone notch & home bar) */
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+
+  /* Motion Curves */
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-accent: background-color 0.6s ease, border-color 0.6s ease, color 0.6s ease, fill 0.6s ease;
+}
+
+/* English Typography Switch */
+html[lang="en"] {
+  --font-body: var(--font-en);
+  --font-logo: var(--font-en-logo);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Universal Viewport Base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-body);
+  background-color: var(--bg-dark-base);
+  color: var(--text-white);
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden !important;
+  width: 100%;
+}
+
+body.fullscreen-app {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  overflow-x: hidden !important;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. Full-Screen Backgrounds
+   -------------------------------------------------------------------------- */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.page-bg-dark {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-dark-gradient);
+}
+
+/* Desktop Semicircular Curved Red Shape */
+.page-bg-curve-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* Shown on desktop/laptop */
+}
+
+.bg-curve-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.4s ease;
+}
+
+/* RTL Horizontal Mirroring */
+html[dir="rtl"] .bg-curve-svg {
+  transform: scaleX(-1);
+}
+
+.curve-shape {
+  fill: var(--product-accent);
+  transition: var(--transition-accent);
+}
+
+/* Decorative Dot Grid */
+.decorative-dots {
+  position: fixed;
+  bottom: clamp(24px, 4.5vh, 48px);
+  inset-inline-end: clamp(24px, 4.5vw, 64px);
+  display: none; /* Visible on desktop/laptop */
+  grid-template-columns: repeat(4, 5px);
+  grid-gap: 12px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.decorative-dots .dot {
+  width: 5px;
+  height: 5px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  opacity: 0.22;
+}
+
+/* --------------------------------------------------------------------------
+   4. Site Shell Wrapper (Centers layout on >1920px screens)
+   -------------------------------------------------------------------------- */
+.site-shell {
+  position: relative;
+  width: 100%;
+  max-width: 1680px;
+  margin-inline: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+/* --------------------------------------------------------------------------
+   5. Page Header (Logo, Language Switcher & Menu)
+   -------------------------------------------------------------------------- */
+.page-header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(clamp(16px, 2.5vh, 36px) + var(--sat)) calc(clamp(16px, 4vw, 64px) + var(--sal)) 0 calc(clamp(16px, 4vw, 64px) + var(--sar));
+  z-index: 100;
+}
+
+/* Brand Logo */
+.brand-logo {
+  text-decoration: none;
+  font-family: var(--font-logo);
+  color: var(--text-white);
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1;
+  transition: transform 0.25s ease;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+html[lang="ar"] .brand-logo {
+  font-family: var(--font-ar-logo);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.2vw, 2.8rem);
+  letter-spacing: normal;
+}
+
+html[lang="en"] .brand-logo {
+  font-family: var(--font-en-logo);
+  font-weight: 400;
+  font-size: clamp(1.55rem, 2.8vw, 2.4rem);
+}
+
+.logo-accent {
+  color: var(--product-accent);
+  transition: var(--transition-accent);
+}
+
+/* Header Controls */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2vw, 20px);
+}
+
+/* Bilingual Pill Switch */
+.lang-switch-wrapper {
+  position: relative;
+}
+
+.lang-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 78px;
+  height: 38px; /* Touch friendly height */
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 3px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lang-toggle:focus-visible {
+  outline: 2px solid var(--product-accent);
+  outline-offset: 2px;
+}
+
+.lang-pill {
+  position: absolute;
+  top: 3px;
+  width: 34px;
+  height: 30px;
+  background-color: var(--product-accent);
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.5s ease;
+  pointer-events: none;
+}
+
+html[dir="rtl"] .lang-pill {
+  inset-inline-start: 3px;
+  transform: translateX(0);
+}
+
+html[dir="rtl"].lang-en-active .lang-pill {
+  transform: translateX(-36px);
+}
+
+html[dir="ltr"] .lang-pill {
+  inset-inline-start: 3px;
+  transform: translateX(36px);
+}
+
+html[dir="ltr"].lang-ar-active .lang-pill {
+  transform: translateX(0);
+}
+
+.lang-label {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-white);
+  z-index: 2;
+  user-select: none;
+}
+
+/* 3x3 Dots Grid Menu Button (44x44px target) */
+.menu-btn {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(3, 4.5px);
+  grid-gap: 5px;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: transform 0.3s var(--ease-smooth), background-color 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.menu-dot {
+  width: 4.5px;
+  height: 4.5px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+/* --------------------------------------------------------------------------
+   6. Content Side Typography & Layout (Mobile Default: Stacked)
+   -------------------------------------------------------------------------- */
+.page-main {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(12px, 2vh, 24px) clamp(16px, 4vw, 48px) calc(clamp(16px, 3vh, 32px) + var(--sab));
+  gap: clamp(14px, 2.5vh, 26px);
+}
+
+.content-side {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+}
+
+/* Outlined Faint Slide Number (Safely centered without transform overflow) */
+.slide-number-wrap {
+  position: absolute;
+  top: -12px;
+  inset-inline: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.slide-number {
+  font-size: clamp(4.2rem, 14vw, 6.2rem);
+  font-weight: 200;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.16);
+  display: inline-block;
+  transition: transform 0.5s var(--ease-smooth), opacity 0.5s ease;
+}
+
+html[lang="ar"] .slide-number {
+  font-family: var(--font-ar);
+}
+
+html[lang="en"] .slide-number {
+  font-family: var(--font-en);
+  letter-spacing: -2px;
+}
+
+/* Heading Group */
+.heading-group {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(12px, 2vh, 22px);
+  width: 100%;
+}
+
+.heading-sub {
+  font-size: clamp(0.85rem, 2.6vw, 1.05rem);
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+html[lang="ar"] .heading-sub {
+  font-family: var(--font-ar);
+  font-weight: 300;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+html[lang="en"] .heading-sub {
+  font-family: var(--font-en);
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* 2-Line Hero Main Title */
+.heading-main {
+  font-size: clamp(1.85rem, 5.8vw, 2.6rem);
+  margin-bottom: 8px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.heading-line-1,
+.heading-line-2 {
+  display: block;
+}
+
+html[lang="ar"] .heading-main {
+  font-family: var(--font-ar);
+  font-weight: 200;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+html[lang="en"] .heading-main {
+  font-family: var(--font-en);
+  font-weight: 200;
+  line-height: 1.15;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.text-accent {
+  color: var(--product-accent);
+  font-weight: 300;
+  transition: var(--transition-accent);
+}
+
+/* Divider Line */
+.heading-divider {
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--product-accent), transparent);
+  margin: 8px auto;
+  border-radius: 2px;
+  transition: var(--transition-accent);
+}
+
+/* Product Tagline */
+.product-tagline {
+  font-size: clamp(0.78rem, 2.4vw, 0.9rem);
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 auto clamp(12px, 2vh, 20px);
+  max-width: 340px;
+}
+
+html[lang="ar"] .product-tagline {
+  font-family: var(--font-ar);
+  font-weight: 400;
+}
+
+html[lang="en"] .product-tagline {
+  font-family: var(--font-en);
+  font-weight: 400;
+}
+
+/* Action Buttons (Feel the Thrill & Share It) */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 20px);
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-white);
+  padding: 6px 8px;
+  min-height: 44px; /* Touch standard */
+  border-radius: 999px;
+  transition: transform 0.25s var(--ease-smooth), opacity 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.action-btn:focus-visible {
+  outline: 2px solid var(--product-accent);
+}
+
+.action-btn:active {
+  transform: scale(0.96);
+}
+
+.btn-text {
+  font-size: clamp(0.78rem, 2.2vw, 0.88rem);
+}
+
+html[lang="ar"] .btn-text {
+  font-family: var(--font-ar);
+  font-weight: 400;
+}
+
+html[lang="en"] .btn-text {
+  font-family: var(--font-en);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Round White Play Button */
+.thrill-btn .btn-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #1f2329;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s var(--ease-smooth), background-color 0.3s ease;
+}
+
+.thrill-btn .btn-icon svg {
+  width: 14px;
+  height: 14px;
+  transform: translateX(1px);
+}
+
+html[dir="rtl"] .thrill-btn .btn-icon svg {
+  transform: scaleX(-1) translateX(1px);
+}
+
+/* Round Share Button */
+.share-btn .btn-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s var(--ease-smooth), border-color 0.3s ease;
+}
+
+.share-btn .btn-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px; /* Touch standard */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s var(--ease-smooth);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.social-icon:active {
+  transform: scale(0.92);
+}
+
+/* --------------------------------------------------------------------------
+   7. Watch Stage & Product Presentation
+   -------------------------------------------------------------------------- */
+.watch-side {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.watch-stage {
+  position: relative;
+  width: 100%;
+  min-height: clamp(230px, 38vh, 320px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Circular Accent Backdrop on Mobile & Tablet Portrait */
+.watch-circle-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(220px, 58vw, 320px);
+  height: clamp(220px, 58vw, 320px);
+  border-radius: 50%;
+  background-color: var(--product-accent);
+  box-shadow: 0 16px 50px rgba(255, 75, 75, 0.35);
+  transition: var(--transition-accent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Watch Image */
+.watch-img {
+  max-width: min(84vw, 360px);
+  max-height: clamp(210px, 36vh, 320px);
+  object-fit: contain;
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.8)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
+  transition: transform 0.65s var(--ease-smooth), opacity 0.5s ease;
+  will-change: transform, opacity;
+  cursor: grab;
+}
+
+.watch-img:active {
+  cursor: grabbing;
+}
+
+.watch-img.watch-entering {
+  opacity: 0;
+  transform: translateY(20px) rotate(-6deg) scale(0.92);
+}
+
+.watch-img.watch-active {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg) scale(1);
+}
+
+.watch-img.watch-leaving {
+  opacity: 0;
+  transform: translateY(-20px) rotate(6deg) scale(0.94);
+}
+
+/* Radial Soft Glow */
+.watch-glow {
+  position: absolute;
+  width: min(300px, 62vw);
+  height: min(300px, 62vw);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------------------
+   8. Slider Progress Bar (Mobile Default: Horizontal at bottom)
+   -------------------------------------------------------------------------- */
+.slider-progress {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+  z-index: 20;
+}
+
+.progress-track {
+  position: relative;
+  width: 120px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2px;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 33.33%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.85);
+  transition: inset-inline-start 0.45s var(--ease-smooth), left 0.45s var(--ease-smooth), right 0.45s var(--ease-smooth);
+}
+
+/* Progress Step Points (44x44px Touch Target) */
+.progress-step {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  margin: -20px 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.progress-step::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.progress-step.active::before {
+  transform: scale(1.6);
+  background-color: #ffffff;
+}
+
+/* Navigation Arrow Buttons (44x44px Touch Target) */
+.slider-nav-arrows {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.nav-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-arrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+.nav-arrow:active {
+  transform: scale(0.92);
+}
+
+html[dir="rtl"] .prev-arrow svg,
+html[dir="rtl"] .next-arrow svg {
+  transform: rotate(180deg);
+}
+
+/* Mouse Wheel Hint (Hidden by default on mobile) */
+.wheel-hint {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   9. Modal & Drawer Overlay Styles
+   -------------------------------------------------------------------------- */
+.modal-overlay[hidden],
+.menu-overlay[hidden] {
+  display: none !important;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 17, 21, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.modal-overlay:not([hidden]) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  position: relative;
+  width: min(580px, 94vw);
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background: #252a32;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  padding: clamp(24px, 4vw, 36px);
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.35s var(--ease-smooth);
+}
+
+.modal-overlay:not([hidden]) .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  inset-inline-end: 16px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--product-accent);
+  margin-bottom: 6px;
+}
+
+html[lang="en"] .modal-badge {
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.modal-title {
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+html[lang="ar"] .modal-title {
+  font-family: var(--font-ar);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.modal-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 480px) {
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.spec-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.spec-icon {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.spec-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.spec-val {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.modal-cta-btn {
+  width: 100%;
+  min-height: 48px;
+  padding: 14px 24px;
+  background-color: var(--product-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 75, 75, 0.4);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Slide-out Menu Drawer */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 17, 21, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 1100;
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+html[dir="rtl"] .menu-overlay {
+  justify-content: flex-start;
+}
+
+.menu-overlay:not([hidden]) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-drawer {
+  width: min(360px, 86vw);
+  height: 100%;
+  background: #20242b;
+  border-inline-start: 1px solid rgba(255, 255, 255, 0.1);
+  padding: calc(30px + var(--sat)) 28px calc(24px + var(--sab));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+html[dir="rtl"] .menu-drawer {
+  transform: translateX(-100%);
+}
+
+.menu-overlay:not([hidden]) .menu-drawer {
+  transform: translateX(0);
+}
+
+.menu-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.drawer-brand {
+  font-family: var(--font-logo);
+  font-size: 1.8rem;
+}
+
+.drawer-close-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 2.2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.drawer-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 300;
+  padding: 6px 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.drawer-copyright {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
+/* Toast Notification (Safely centered without horizontal overflow) */
+.toast-notification {
+  position: fixed;
+  bottom: calc(24px + var(--sab));
+  left: 50%;
+  transform: translate(-50%, 30px);
+  background: #1f2329;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-smooth);
+  z-index: 2000;
+}
+
+.toast-notification.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.toast-icon {
+  color: #4ade80;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   10. DEVICE SPECIFIC MEDIA QUERIES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   A. Tablet Portrait (600px - 1023px width, portrait / aspect-ratio < 1.1)
+   Devices: iPad (768x1024), iPad Air (820x1180), iPad Pro (1024x1366)
+   Layout: Full-screen, no scroll, text on top, watch below, circular curve.
+   -------------------------------------------------------------------------- */
+@media (min-width: 600px) and (max-width: 1023px) and (orientation: portrait),
+       (min-width: 600px) and (max-width: 1023px) and (min-height: 750px) {
+  body.fullscreen-app {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .site-shell {
+    height: 100vh;
+    height: 100dvh;
+    justify-content: space-between;
+  }
+
+  .page-header {
+    padding: calc(24px + var(--sat)) clamp(28px, 5vw, 56px) 0;
+  }
+
+  .page-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    padding: 10px clamp(28px, 5vw, 56px) calc(20px + var(--sab));
+    gap: 14px;
+  }
+
+  .content-side {
+    max-width: 580px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .slide-number-wrap {
+    top: -16px;
+  }
+
+  .slide-number {
+    font-size: clamp(5.2rem, 11vw, 7.2rem);
+  }
+
+  .heading-group {
+    margin-top: 16px;
+  }
+
+  .heading-sub {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+  }
+
+  .heading-main {
+    font-size: clamp(2.4rem, 4.8vw, 3.6rem);
+    margin-bottom: 10px;
+  }
+
+  .product-tagline {
+    font-size: 0.95rem;
+    max-width: 440px;
+    margin-bottom: 16px;
+  }
+
+  .action-buttons {
+    gap: 22px;
+  }
+
+  .watch-side {
+    flex: 1;
+    width: 100%;
+    max-height: 44vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .watch-stage {
+    min-height: unset;
+    height: 100%;
+  }
+
+  .watch-circle-bg {
+    width: clamp(280px, 42vw, 420px);
+    height: clamp(280px, 42vw, 420px);
+  }
+
+  .watch-img {
+    max-height: min(420px, 40vh);
+    max-width: 72vw;
+  }
+
+  .slider-progress {
+    position: relative;
+    margin-top: 6px;
+  }
+
+  .social-links {
+    margin-top: 8px;
+    gap: 24px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   B. Desktop & Laptop (width >= 1024px and height >= 500px, or landscape)
+   Devices: iPad landscape (1024x768, 1180x820, 1366x1024),
+            Laptops (1280x800, 1440x900), Monitors (1920x1080, 2560x1440)
+   Layout: Full-screen edge-to-edge split, side-by-side, large SVG curve.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) and (min-height: 500px) and (orientation: landscape),
+       (min-width: 1100px) and (min-height: 600px) {
+  body.fullscreen-app {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  /* Show Desktop SVG Curve */
+  .page-bg-curve-wrap {
+    display: block;
+  }
+
+  /* Hide Mobile/Tablet Circle Accent */
+  .watch-circle-bg {
+    display: none;
+  }
+
+  /* Show Decorative Dots */
+  .decorative-dots {
+    display: grid;
+  }
+
+  /* Show Wheel Hint */
+  .wheel-hint {
+    position: fixed;
+    bottom: calc(clamp(14px, 2.5vh, 24px) + var(--sab));
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.78rem;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  html[lang="ar"] .wheel-hint {
+    font-family: var(--font-ar);
+    letter-spacing: normal;
+  }
+
+  .wheel-mouse-icon {
+    width: 14px;
+    height: 22px;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .wheel-mouse-icon::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    width: 2px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.7);
+    transform: translateX(-50%);
+    border-radius: 1px;
+    animation: mouseWheel 1.6s infinite ease;
+  }
+
+  @keyframes mouseWheel {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 8px); opacity: 0; }
+  }
+
+  .site-shell {
+    height: 100vh;
+    height: 100dvh;
+    justify-content: flex-start;
+  }
+
+  .page-header {
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    padding: calc(clamp(24px, 3.8vh, 44px) + var(--sat)) clamp(24px, 4.5vw, 64px) 0;
+  }
+
+  /* Side-by-Side Main Layout */
+  .page-main {
+    height: 100vh;
+    height: 100dvh;
+    display: grid;
+    grid-template-columns: minmax(360px, 42vw) 1fr;
+    align-items: center;
+    padding: calc(clamp(60px, 8vh, 90px) + var(--sat)) clamp(24px, 4.5vw, 64px) calc(clamp(24px, 4vh, 48px) + var(--sab));
+    gap: 0;
+  }
+
+  .content-side {
+    height: 100%;
+    max-width: min(500px, 39vw);
+    justify-content: center;
+    align-items: flex-start;
+    text-align: start;
+    padding-inline-start: 0;
+  }
+
+  html[dir="rtl"] .content-side {
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  .slide-number-wrap {
+    top: clamp(10px, 3vh, 35px);
+    inset-inline-start: -6px;
+    inset-inline-end: auto;
+    justify-content: flex-start;
+  }
+
+  .slide-number {
+    font-size: clamp(5.2rem, 8.5vw, 8.8rem);
+  }
+
+  .heading-group {
+    margin-top: clamp(16px, 3vh, 32px);
+  }
+
+  .heading-sub {
+    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+    margin-bottom: 6px;
+  }
+
+  .heading-main {
+    font-size: clamp(2.2rem, 3.6vw, 3.8rem);
+    margin-bottom: 14px;
+  }
+
+  .heading-divider {
+    margin: 16px 0 16px;
+    width: 2px;
+    height: clamp(30px, 4vh, 42px);
+    background: linear-gradient(to bottom, var(--product-accent), rgba(255, 255, 255, 0.2));
+  }
+
+  .product-tagline {
+    margin: 0 0 clamp(20px, 3vh, 32px);
+    max-width: 420px;
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
+  }
+
+  .action-buttons {
+    justify-content: flex-start;
+    gap: clamp(18px, 2.5vw, 32px);
+  }
+
+  /* Desktop Vertical Social Links at Bottom-Start */
+  .social-links {
+    position: absolute;
+    bottom: calc(clamp(10px, 2vh, 24px) + var(--sab));
+    inset-inline-start: -4px;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 0;
+  }
+
+  /* Watch Stage on Desktop */
+  .watch-side {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .watch-stage {
+    min-height: unset;
+    height: 100%;
+  }
+
+  .watch-img {
+    max-width: min(520px, 44vw);
+    max-height: min(650px, 72vh);
+  }
+
+  /* Desktop Vertical Progress Bar */
+  .slider-progress {
+    position: fixed;
+    inset-inline-end: calc(clamp(24px, 4.5vw, 64px) + var(--sar));
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 0;
+    width: auto;
+  }
+
+  .progress-track {
+    width: 4px;
+    height: 140px;
+    flex-direction: column;
+    padding: 2px 0;
+  }
+
+  .progress-bar-fill {
+    top: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 33.33%;
+    transition: top 0.45s var(--ease-smooth);
+  }
+
+  .progress-step {
+    margin: 0 -15px;
+  }
+
+  .slider-nav-arrows {
+    flex-direction: column;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   C. Short Screens / Phone in Landscape (height < 500px, e.g. 844x390, 667x375)
+   Side-by-side compact layout so everything fits without scrolling!
+   -------------------------------------------------------------------------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  body.fullscreen-app {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden !important;
+  }
+
+  .site-shell {
+    height: 100vh;
+    height: 100dvh;
+    justify-content: space-between;
+  }
+
+  .page-header {
+    position: relative;
+    padding: calc(6px + var(--sat)) clamp(14px, 3vw, 24px) 0;
+  }
+
+  html[lang="ar"] .brand-logo { font-size: 1.4rem; }
+  html[lang="en"] .brand-logo { font-size: 1.3rem; }
+
+  .lang-toggle {
+    width: 68px;
+    height: 32px;
+  }
+
+  .lang-pill {
+    width: 30px;
+    height: 24px;
+  }
+
+  html[dir="rtl"].lang-en-active .lang-pill {
+    transform: translateX(-31px);
+  }
+
+  html[dir="ltr"] .lang-pill {
+    transform: translateX(31px);
+  }
+
+  .menu-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Compact Main Grid */
+  .page-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    padding: 4px clamp(14px, 3vw, 24px) calc(6px + var(--sab));
+    gap: 12px;
+  }
+
+  .content-side {
+    max-width: 100%;
+    align-items: flex-start;
+    text-align: start;
+    justify-content: center;
+  }
+
+  /* Hide bulky elements on short landscape screens */
+  .slide-number-wrap,
+  .heading-divider,
+  .decorative-dots,
+  .wheel-hint {
+    display: none !important;
+  }
+
+  .heading-group {
+    margin-top: 0;
+  }
+
+  .heading-sub {
+    font-size: 0.75rem;
+    margin-bottom: 2px;
+  }
+
+  .heading-main {
+    font-size: clamp(1.15rem, 5.5vh, 1.6rem);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .product-tagline {
+    font-size: 0.72rem;
+    line-height: 1.3;
+    margin: 0 0 8px;
+    max-width: 320px;
+  }
+
+  .action-buttons {
+    gap: 12px;
+    justify-content: flex-start;
+  }
+
+  .action-btn {
+    padding: 2px 4px;
+    min-height: 36px;
+  }
+
+  .btn-text {
+    font-size: 0.75rem;
+  }
+
+  .thrill-btn .btn-icon,
+  .share-btn .btn-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .social-links {
+    margin-top: 6px;
+    gap: 12px;
+  }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Watch Stage */
+  .watch-side {
+    height: 100%;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .watch-stage {
+    min-height: unset;
+    height: 100%;
+  }
+
+  .watch-circle-bg {
+    width: clamp(160px, 40vh, 220px);
+    height: clamp(160px, 40vh, 220px);
+  }
+
+  .watch-img {
+    max-height: min(230px, 68vh);
+    max-width: min(230px, 35vw);
+  }
+
+  /* Compact Horizontal Progress Bar */
+  .slider-progress {
+    position: static;
+    transform: none;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 0;
+    width: auto;
+  }
+
+  .progress-track {
+    width: 4px;
+    height: 70px;
+    flex-direction: column;
+  }
+
+  .progress-bar-fill {
+    width: 100%;
+    height: 33.33%;
+  }
+
+  .slider-nav-arrows {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-arrow {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. Hover Effects (Only on devices that support hover)
+   -------------------------------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .brand-logo:hover {
+    transform: scale(1.04);
+  }
+
+  .lang-toggle:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .menu-btn:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+    transform: rotate(90deg);
+  }
+
+  .action-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .thrill-btn:hover .btn-icon {
+    transform: scale(1.12);
+    background-color: var(--product-accent);
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(255, 75, 75, 0.5);
+  }
+
+  .share-btn:hover .btn-icon {
+    transform: scale(1.12);
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .social-icon:hover {
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.15);
+  }
+
+  .nav-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  .progress-step:hover::before {
+    transform: scale(1.6);
+    background-color: #ffffff;
+  }
+
+  .spec-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .modal-cta-btn:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 75, 75, 0.6);
+  }
+
+  .modal-close-btn:hover {
+    color: #ffffff;
+    transform: scale(1.15);
+  }
+
+  .drawer-link:hover {
+    color: var(--product-accent);
+    transform: translateX(6px);
+  }
+
+  html[dir="rtl"] .drawer-link:hover {
+    transform: translateX(-6px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. Accessibility: Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

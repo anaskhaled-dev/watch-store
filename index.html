@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ساعة | Saa'a Luxury Chronographs</title>
+  <meta name="description" content="ساعة - تشكيلة حصرية من ساعات الكرونوغراف الفاخرة ذات التصميم العصري والهندسة السويسرية الدقيقة.">
+  
+  <!-- Google Fonts: Alexandria & Aref Ruqaa (Arabic) + Montserrat & Pacifico (English) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300;400;500;600;700&family=Aref+Ruqaa:wght@700&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&family=Pacifico&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="fullscreen-app">
+
+  <!-- Fullscreen Edge-to-Edge Split Background (Desktop Curved Red & Dark Charcoal) -->
+  <div class="page-bg" aria-hidden="true">
+    <div class="page-bg-dark"></div>
+    <div class="page-bg-curve-wrap">
+      <svg class="bg-curve-svg" viewBox="0 0 1440 900" preserveAspectRatio="none">
+        <path class="curve-shape" d="M 980 0 L 1440 0 L 1440 900 L 980 900 C 720 760 660 590 660 450 C 660 310 720 140 980 0 Z" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Decorative Dot Grid (Desktop / Accent side) -->
+  <div class="decorative-dots" aria-hidden="true">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+
+  <!-- Centered Content Wrapper (Restricts max-width to 1600px on very large monitors) -->
+  <div class="site-shell">
+
+    <!-- Page Header (Logo, Language Switcher, Menu) -->
+    <header class="page-header">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" aria-label="Saa'a Luxury Watches">
+        <span class="logo-accent" id="logoAccent">سـ&zwj;</span><span class="logo-rest" id="logoText">&zwj;اعة</span>
+      </a>
+
+      <!-- Header Controls -->
+      <div class="header-controls">
+        <!-- Bilingual Pill Toggle (ع | EN) -->
+        <div class="lang-switch-wrapper">
+          <button class="lang-toggle" id="langToggle" aria-label="تبديل اللغة / Toggle Language" type="button">
+            <span class="lang-pill" id="langPill"></span>
+            <span class="lang-label" data-lang="ar">ع</span>
+            <span class="lang-label" data-lang="en">EN</span>
+          </button>
+        </div>
+
+        <!-- 3x3 Dots Grid Menu Button -->
+        <button class="menu-btn" id="menuBtn" aria-label="القائمة / Menu" aria-expanded="false" type="button">
+          <span class="menu-dot"></span><span class="menu-dot"></span><span class="menu-dot"></span>
+          <span class="menu-dot"></span><span class="menu-dot"></span><span class="menu-dot"></span>
+          <span class="menu-dot"></span><span class="menu-dot"></span><span class="menu-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Viewport Workspace -->
+    <main class="page-main" role="region" aria-label="Product Showcase">
+
+      <!-- Content Column (Headings, Buttons, Social) -->
+      <section class="content-side">
+        <!-- Faint Outlined Slide Number -->
+        <div class="slide-number-wrap">
+          <span class="slide-number" id="slideNumber">01</span>
+        </div>
+
+        <!-- Hero Headings (2-Line Stacked) -->
+        <div class="heading-group">
+          <p class="heading-sub" id="headingSub" data-i18n="slide1_sub">كل شيء</p>
+          <h1 class="heading-main" id="headingMain">
+            <span class="heading-line-1" id="headingPart1">يدور حول</span>
+            <span class="heading-line-2 text-accent" id="headingPart2">الوقت</span>
+          </h1>
+          <div class="heading-divider" aria-hidden="true"></div>
+          <p class="product-tagline" id="productTagline" data-i18n="slide1_tagline">كرونوغراف كحلي داكن • إصدار 42 مم • حركة أوتوماتيكية</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="action-btn thrill-btn" id="thrillBtn" type="button" aria-label="عِش الإثارة">
+            <span class="btn-icon play-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </span>
+            <span class="btn-text" data-i18n="feel_thrill">عِش الإثارة</span>
+          </button>
+
+          <button class="action-btn share-btn" id="shareBtn" type="button" aria-label="شاركها">
+            <span class="btn-icon share-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+            </span>
+            <span class="btn-text" data-i18n="share_it">شاركها</span>
+          </button>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-links" aria-label="وسائل التواصل الاجتماعي">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.2 22 12z"/>
+            </svg>
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Pinterest">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.332 1.357-.053.224-.174.271-.403.165-1.5-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Watch Stage & Showcase -->
+      <section class="watch-side" aria-label="معاينة الساعة / Watch Showcase">
+        <div class="watch-stage" id="watchStage">
+          <!-- Circular Accent Spotlight for Tablet Portrait & Phone Views -->
+          <div class="watch-circle-bg" aria-hidden="true"></div>
+          <!-- High Quality Watch Image (Eager loading for first product) -->
+          <img 
+            id="watchImage" 
+            src="images/watch-1.png" 
+            alt="ساعة كرونوغراف فاخرة - Saa'a Luxury Watch" 
+            class="watch-img watch-active"
+            draggable="false"
+            loading="eager"
+            fetchpriority="high"
+          >
+          <!-- Soft Ambient Light Glow -->
+          <div class="watch-glow" aria-hidden="true"></div>
+        </div>
+
+        <!-- Slide Progress Bar (Vertical on desktop, horizontal on mobile/tablet) -->
+        <nav class="slider-progress" aria-label="مؤشر الشرائح / Slide Progress">
+          <div class="progress-track" id="progressTrack">
+            <div class="progress-bar-fill" id="progressFill"></div>
+            <!-- Clickable Step Points (minimum 44x44px touch target) -->
+            <button class="progress-step active" data-step="0" aria-label="الشريحة 1 / Slide 1"></button>
+            <button class="progress-step" data-step="1" aria-label="الشريحة 2 / Slide 2"></button>
+            <button class="progress-step" data-step="2" aria-label="الشريحة 3 / Slide 3"></button>
+          </div>
+          <!-- Arrow Navigation Buttons -->
+          <div class="slider-nav-arrows">
+            <button class="nav-arrow prev-arrow" id="prevSlideBtn" aria-label="السابق / Previous Slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button class="nav-arrow next-arrow" id="nextSlideBtn" aria-label="التالي / Next Slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </nav>
+      </section>
+
+    </main>
+
+  </div><!-- /.site-shell -->
+
+  <!-- Navigation Wheel Hint (Bottom Center on desktop) -->
+  <aside class="wheel-hint" aria-hidden="true">
+    <span class="wheel-mouse-icon"></span>
+    <span class="wheel-text" data-i18n="scroll_hint">مرّر أو اسحب للتنقل بين الساعات</span>
+  </aside>
+
+  <!-- Luxury Modal: "Feel The Thrill" Interactive Showcase -->
+  <div class="modal-overlay" id="thrillModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="إغلاق / Close">&times;</button>
+      <div class="modal-header">
+        <span class="modal-badge" data-i18n="modal_badge">المواصفات الملكية</span>
+        <h2 id="modalTitle" class="modal-title" data-i18n="modal_title">إحساس الدقة المطلقة</h2>
+        <p class="modal-subtitle" data-i18n="modal_desc">تجسيد للفخامة والحرفية المتقنة، حيث تلتقي دقة الساعات الميكانيكية بأعلى معايير التصميم العالمي.</p>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-card">
+          <div class="spec-icon">⏱</div>
+          <div class="spec-label" data-i18n="spec_movement_lbl">آلية الحركة</div>
+          <div class="spec-val" id="specMovement" data-i18n="spec_movement_val">أوتوماتيكية كاليبر 4130</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-icon">🛡</div>
+          <div class="spec-label" data-i18n="spec_case_lbl">الهيكل والزجاج</div>
+          <div class="spec-val" id="specCase" data-i18n="spec_case_val">فولاذ 316L وزفير مقاوم للخدش</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-icon">💧</div>
+          <div class="spec-label" data-i18n="spec_water_lbl">مقاومة الماء</div>
+          <div class="spec-val" data-i18n="spec_water_val">100 متر / 10 بار</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-icon">✨</div>
+          <div class="spec-label" data-i18n="spec_reserve_lbl">احتياطي الطاقة</div>
+          <div class="spec-val" data-i18n="spec_reserve_val">72 ساعة متواصلة</div>
+        </div>
+      </div>
+
+      <div class="modal-action-row">
+        <button class="modal-cta-btn" id="modalOrderBtn" data-i18n="modal_reserve">احجز نسختك الآن</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Luxury Slide-out Menu Drawer -->
+  <aside class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="menu-drawer">
+      <div class="menu-drawer-header">
+        <span class="drawer-brand">
+          <span class="logo-accent">سـ&zwj;</span><span class="logo-rest">&zwj;اعة</span>
+        </span>
+        <button class="drawer-close-btn" id="menuCloseBtn" aria-label="إغلاق القائمة">&times;</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="#collection" class="drawer-link" data-i18n="menu_collection">المجموعة الفاخرة</a>
+        <a href="#craftsmanship" class="drawer-link" data-i18n="menu_craft">الحرفية والتاريخ</a>
+        <a href="#boutiques" class="drawer-link" data-i18n="menu_boutiques">المتاجر الحصرية</a>
+        <a href="#bespoke" class="drawer-link" data-i18n="menu_bespoke">التصميم المخصص</a>
+        <a href="#contact" class="drawer-link" data-i18n="menu_contact">تواصل معنا</a>
+      </nav>
+      <div class="drawer-footer">
+        <p class="drawer-copyright" data-i18n="menu_copy">© 2026 ساعة. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toastNotification" role="status" aria-live="polite">
+    <span class="toast-icon">✓</span>
+    <span class="toast-msg" id="toastMsg">تم نسخ الرابط بنجاح!</span>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
